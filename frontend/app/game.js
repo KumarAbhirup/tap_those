@@ -40,20 +40,34 @@ function gamePlay() {
   ;(() => {
     ballTimer += 1 / frameRate()
     if (ballTimer >= 1.25) {
-      const ballType = random(ballTypes)
+      const ballType1 = random(ballTypes)
+      const ballType2 = random(ballTypes)
 
       balls.push(
         new Ball(
           {
             x: random(0, width),
-            y: 0 - objSize * 2,
+            y: 0 - objSize * random(3, 6),
           },
           { radius: 50 },
           {
             shape: 'circle',
-            image: ballType.image,
-            rotate: true,
-            type: ballType.type,
+            image: ballType1.image,
+            rotate: Koji.config.strings.rotateFallingBalls,
+            type: ballType1.type,
+          }
+        ),
+        new Ball(
+          {
+            x: random(0, width),
+            y: 0 - objSize * random(2, 6),
+          },
+          { radius: 50 },
+          {
+            shape: 'circle',
+            image: ballType2.image,
+            rotate: Koji.config.strings.rotateFallingBalls,
+            type: ballType2.type,
           }
         )
       )

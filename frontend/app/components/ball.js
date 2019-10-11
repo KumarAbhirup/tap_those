@@ -15,7 +15,7 @@ class Ball extends GameObject {
   maxVelocity = 10
 
   update() {
-    this.rotate()
+    this.rotate(null, 0.04, 'auto')
 
     this.velocity = Smooth(this.velocity, this.maxVelocity, 100)
     this.body.position.y += this.velocity
