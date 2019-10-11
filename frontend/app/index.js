@@ -385,26 +385,24 @@ function manageData() {
 }
 
 function handleNewConnection() {
-  //
+  removeEmptyEnemies()
 }
 
-function spawnEnemy(userId, playerName) {
-  const toBePushedEnemy = new Player(
-    {
-      x: random(0, width),
-      y: random(0, height),
-    },
-    { radius: 20 },
-    {
-      shape: 'circle',
-      color: '#ffffff',
-      id: userId,
-      playerName: playerName || 'Player',
-    }
-  )
-  toBePushedEnemy.id = userId
+function removeEmptyEnemies() {
+  for (let i = 0; i < enemies.length; i++) {
+    let userExists = false
 
-  enemies.push(toBePushedEnemy)
+    // eslint-disable-next-line no-restricted-syntax
+    for (let user in users) {
+      if (user === enemies[i].id) {
+        userExists = true
+      }
+    }
+
+    if (!userExists) {
+      enemies[i].removable = true
+    }
+  }
 }
 
 /**
