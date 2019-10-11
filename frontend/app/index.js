@@ -491,15 +491,45 @@ function touchStarted() {
       ) {
         balls.splice(i, 1)
 
-        addScore(
-          ball.settings.scoreGivenAfterBusting,
-          ball.settings.type !== 2 ? imgLife : soundImage,
-          { x: mouseX, y: mouseY },
-          10,
-          {
-            floatingText: true,
-          }
-        )
+        if (ball.settings.type !== 2) {
+          addScore(
+            ball.settings.scoreGivenAfterBusting,
+            ball.settings.type !== 2 ? imgLife : soundImage,
+            { x: mouseX, y: mouseY },
+            10,
+            {
+              floatingText: true,
+            }
+          )
+        } else if (lives === 1) {
+          sndLost.play(0, 1, 100)
+
+          addScore(
+            ball.settings.scoreGivenAfterBusting,
+            ball.settings.type !== 2 ? imgLife : soundImage,
+            { x: mouseX, y: mouseY },
+            10,
+            {
+              floatingText: true,
+            }
+          )
+
+          setTimeout(loseLife, 1000)
+        } else {
+          sndLostLife.play(0, 1, 100)
+
+          addScore(
+            ball.settings.scoreGivenAfterBusting,
+            ball.settings.type !== 2 ? imgLife : soundImage,
+            { x: mouseX, y: mouseY },
+            10,
+            {
+              floatingText: true,
+            }
+          )
+
+          loseLife()
+        }
       }
     })
 
