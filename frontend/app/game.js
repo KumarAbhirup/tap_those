@@ -39,7 +39,7 @@ function gamePlay() {
   // Spawn a ball every second
   ;(() => {
     ballTimer += 1 / frameRate()
-    if (ballTimer >= 1.25) {
+    if (ballTimer >= 1.15) {
       const ballType1 = random(ballTypes)
       const ballType2 = random(ballTypes)
 
@@ -56,6 +56,7 @@ function gamePlay() {
             rotate: Koji.config.strings.rotateFallingBalls,
             type: ballType1.type,
             scoreGivenAfterBusting: ballType1.scoreGivenAfterBusting,
+            scoreGivenAfterOut: ballType1.scoreGivenAfterOut,
           }
         ),
         new Ball(
@@ -70,6 +71,7 @@ function gamePlay() {
             rotate: Koji.config.strings.rotateFallingBalls,
             type: ballType2.type,
             scoreGivenAfterBusting: ballType2.scoreGivenAfterBusting,
+            scoreGivenAfterOut: ballType2.scoreGivenAfterOut,
           }
         )
       )

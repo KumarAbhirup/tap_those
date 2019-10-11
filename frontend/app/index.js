@@ -67,6 +67,7 @@ let sndEnd
 let sndEnemyHit
 let sndExplosion
 let sndLostLife
+let sndLost
 
 let soundEnabled = true
 let canMute = true
@@ -152,6 +153,7 @@ function preload() {
   if (Koji.config.sounds.explosion)
     sndExplosion = loadSound(Koji.config.sounds.explosion)
   if (Koji.config.sounds.life) sndLostLife = loadSound(Koji.config.sounds.life)
+  if (Koji.config.sounds.lose) sndLost = loadSound(Koji.config.sounds.lose)
 
   // Load settings from Game Settings
   scoreGain = parseInt(Koji.config.strings.scoreGain)
@@ -200,16 +202,19 @@ function instantiate() {
       type: 0,
       image: imgBalls[0],
       scoreGivenAfterBusting: 50,
+      scoreGivenAfterOut: -50,
     },
     {
       type: 1,
       image: imgBalls[1],
       scoreGivenAfterBusting: 25,
+      scoreGivenAfterOut: -5,
     },
     {
       type: 2,
       image: imgBalls[2],
       scoreGivenAfterBusting: -100,
+      scoreGivenAfterOut: 0,
     },
   ]
 }
@@ -269,8 +274,6 @@ function setup() {
   dispatch.on('enemy_update', payload => {
     enemies.forEach(enemy => {
       if (enemy.id === payload.id) {
-        enemy.body.position.x = payload.posX
-        enemy.body.position.y = payload.posY
         enemy.score = payload.score
         enemy.name = payload.name
       }
@@ -374,8 +377,6 @@ function manageData() {
     dispatch.emitEvent('enemy_update', {
       id: dispatch.clientId,
       name: dispatch.userInfo.playerName,
-      posX: Math.floor(player.body.position.x),
-      posY: Math.floor(player.body.position.y),
       score,
     })
   } catch (error) {
@@ -384,38 +385,7 @@ function manageData() {
 }
 
 function handleNewConnection() {
-  let enemyIDs = []
-
-  for (let i = 0; i < enemies.length; i++) {
-    enemyIDs[i] = enemies[i].id
-  }
-
-  for (let id in users) {
-    if (id !== dispatch.clientId) {
-      if (!enemyIDs.includes(id) && users[id].playerName) {
-        spawnEnemy(id, users[id].playerName)
-      }
-    }
-  }
-
-  removeEmptyEnemies()
-}
-
-function removeEmptyEnemies() {
-  for (let i = 0; i < enemies.length; i++) {
-    let userExists = false
-
-    // eslint-disable-next-line no-restricted-syntax
-    for (let user in users) {
-      if (user === enemies[i].id) {
-        userExists = true
-      }
-    }
-
-    if (!userExists) {
-      enemies[i].removable = true
-    }
-  }
+  //
 }
 
 function spawnEnemy(userId, playerName) {
