@@ -12,7 +12,7 @@ class Ball extends GameObject {
 
   velocity = 0
 
-  maxVelocity = 10
+  maxVelocity = 5
 
   update() {
     this.rotate(null, 0.04, 'auto')

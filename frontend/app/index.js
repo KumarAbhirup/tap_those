@@ -612,35 +612,6 @@ function keyReleased() {
   }
 }
 
-function mousePressed() {
-  // Detect Click
-  balls.forEach((ball, i) => {
-    if (
-      collidePointCircle(
-        mouseX,
-        mouseY,
-        ball.body.position.x,
-        ball.body.position.y,
-        ball.sizing.radius * 2
-      )
-    ) {
-      balls.splice(i, 1)
-
-      addScore(
-        ball.settings.scoreGivenAfterBusting,
-        ball.settings.type !== 2 ? imgLife : soundImage,
-        { x: mouseX, y: mouseY },
-        10,
-        {
-          floatingText: true,
-        }
-      )
-    }
-  })
-}
-
-function mouseReleased() {}
-
 /**
  * Call this every time you want to start or reset the game
  * This is a good place to clear all arrays like enemies, bullets etc before starting a new game
