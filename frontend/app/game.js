@@ -49,12 +49,13 @@ function gamePlay() {
             x: random(0, width),
             y: 0 - objSize * random(3, 6),
           },
-          { radius: 50 },
+          { radius: objSize * 2 },
           {
             shape: 'circle',
             image: ballType1.image,
             rotate: Koji.config.strings.rotateFallingBalls,
             type: ballType1.type,
+            scoreGivenAfterBusting: ballType1.scoreGivenAfterBusting,
           }
         ),
         new Ball(
@@ -62,12 +63,13 @@ function gamePlay() {
             x: random(0, width),
             y: 0 - objSize * random(2, 6),
           },
-          { radius: 50 },
+          { radius: objSize * 2 },
           {
             shape: 'circle',
             image: ballType2.image,
             rotate: Koji.config.strings.rotateFallingBalls,
             type: ballType2.type,
+            scoreGivenAfterBusting: ballType2.scoreGivenAfterBusting,
           }
         )
       )

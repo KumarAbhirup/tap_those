@@ -199,14 +199,17 @@ function instantiate() {
     {
       type: 0,
       image: imgBalls[0],
+      scoreGivenAfterBusting: 50,
     },
     {
       type: 1,
       image: imgBalls[1],
+      scoreGivenAfterBusting: 25,
     },
     {
       type: 2,
       image: imgBalls[2],
+      scoreGivenAfterBusting: -100,
     },
   ]
 }
@@ -507,6 +510,31 @@ function touchStarted() {
     // InGame
     touching = true
 
+    // Detect Click
+    balls.forEach((ball, i) => {
+      if (
+        collidePointCircle(
+          mouseX,
+          mouseY,
+          ball.body.position.x,
+          ball.body.position.y,
+          ball.sizing.radius * 2
+        )
+      ) {
+        balls.splice(i, 1)
+
+        addScore(
+          ball.settings.scoreGivenAfterBusting,
+          ball.settings.type !== 2 ? imgLife : soundImage,
+          { x: mouseX, y: mouseY },
+          10,
+          {
+            floatingText: true,
+          }
+        )
+      }
+    })
+
     if (emojiCooldown <= 0) {
       for (let i = 0; i < emojis.length; i++) {
         if (emojis[i].checkTouch()) {
@@ -583,6 +611,35 @@ function keyReleased() {
   if (!gameOver && !gameBeginning) {
   }
 }
+
+function mousePressed() {
+  // Detect Click
+  balls.forEach((ball, i) => {
+    if (
+      collidePointCircle(
+        mouseX,
+        mouseY,
+        ball.body.position.x,
+        ball.body.position.y,
+        ball.sizing.radius * 2
+      )
+    ) {
+      balls.splice(i, 1)
+
+      addScore(
+        ball.settings.scoreGivenAfterBusting,
+        ball.settings.type !== 2 ? imgLife : soundImage,
+        { x: mouseX, y: mouseY },
+        10,
+        {
+          floatingText: true,
+        }
+      )
+    }
+  })
+}
+
+function mouseReleased() {}
 
 /**
  * Call this every time you want to start or reset the game
