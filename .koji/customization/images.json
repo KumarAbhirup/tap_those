@@ -42,8 +42,8 @@
       },
       {
         "key": "ballImage3",
-        "name": "Ball Image 3",
-        "description": "Ideal size: 100x100",
+        "name": "Bomb Image",
+        "description": "Ideal size: 100x100. This image should have a negative sentiment showing that clicking the circle with this image would be dangerous.",
         "type": "image"
       },
       {
