@@ -148,8 +148,8 @@ class GameObject {
     return (
       this.body.position.x > width + objSize * 3 ||
       this.body.position.x < 0 - objSize * 3 ||
-      this.body.position.y > height + 500 ||
-      this.body.position.y < 0
+      this.body.position.y > height + 2
+      // || this.body.position.y < 0 // You don't need this for balls
     )
   }
 
@@ -219,7 +219,7 @@ class GameObject {
   }
 
   // Rotate the object
-  rotate(degrees = 0) {
+  rotate(degrees = (this.rotateStartAt += 0.1)) {
     this.body.angle = degrees
   }
 

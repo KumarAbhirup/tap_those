@@ -36,14 +36,37 @@ function gamePlay() {
   // InGame UI
   removeEmptyEnemies()
 
+  // Spawn a ball every second
+  ;(() => {
+    ballTimer += 1 / frameRate()
+    if (ballTimer >= 1.25) {
+      const ballType = random(ballTypes)
+
+      balls.push(
+        new Ball(
+          {
+            x: random(0, width),
+            y: 0 - objSize * 2,
+          },
+          { radius: 50 },
+          {
+            shape: 'circle',
+            image: ballType.image,
+            rotate: true,
+            type: ballType.type,
+          }
+        )
+      )
+
+      ballTimer = 0
+    }
+  })()
+
   camera.on()
 
-  player.show()
-  player.showPlayerName()
-
-  enemies.forEach(enemy => {
-    enemy.show()
-    enemy.showPlayerName()
+  balls.forEach(ball => {
+    ball.show()
+    ball.update()
   })
 
   if (cameraTarget) {

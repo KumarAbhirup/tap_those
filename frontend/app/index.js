@@ -24,8 +24,11 @@ let particles = []
 // Game Objects (READ-ONLY)
 let player
 let enemies = []
+let balls = []
 
 // Game Stuffs (READ-N-WRITE)
+let ballTypes = []
+
 let emojis = []
 let emojiCooldown = 0
 
@@ -54,6 +57,7 @@ let comboTexts = []
 // Images
 let imgLife
 let imgBackground
+let imgBalls = []
 
 // Audio
 let sndMusic
@@ -77,6 +81,7 @@ let gameTimerEnabled = false
 let gameOverRectangleHeight = 0 // for game over animation
 
 let loadingAnimationTimer = 0
+let ballTimer = 0
 
 let canScore = false
 
@@ -126,6 +131,10 @@ function preload() {
   }
 
   // Load images
+  imgBalls[0] = loadImage(Koji.config.images.ballImage1)
+  imgBalls[1] = loadImage(Koji.config.images.ballImage2)
+  imgBalls[2] = loadImage(Koji.config.images.ballImage3)
+
   imgLife = loadImage(Koji.config.images.lifeIcon)
   soundImage = loadImage(Koji.config.images.soundImage)
   muteImage = loadImage(Koji.config.images.muteImage)
@@ -184,6 +193,22 @@ function instantiate() {
 
     emojis[i] = new Emoji(x, y, emojiSize, Koji.config.strings.emojis[i])
   }
+
+  // Ball Types
+  ballTypes = [
+    {
+      type: 0,
+      image: imgBalls[0],
+    },
+    {
+      type: 1,
+      image: imgBalls[1],
+    },
+    {
+      type: 2,
+      image: imgBalls[2],
+    },
+  ]
 }
 
 // Setup your props
@@ -444,6 +469,13 @@ function cleanup() {
       enemies.splice(i, 1)
     }
   }
+
+  // Clean Balls
+  for (let i = 0; i < balls.length; i++) {
+    if (balls[i].removable) {
+      balls.splice(i, 1)
+    }
+  }
 }
 
 // Call this when a lose life event should trigger
@@ -575,15 +607,17 @@ function init() {
   enemies = []
   users = []
 
+  balls = []
+
   dispatch.disconnect()
   dispatch.connect()
 
   // Keep everyone at their original place
   instantiate()
 
-  camera.position.x = player.body.position.x
-  camera.position.y = player.body.position.y
-  cameraTarget = player
+  camera.position.x = width / 2
+  camera.position.y = height / 2
+  cameraTarget = null
 
   /**
    * In multiplayer games as of now,
