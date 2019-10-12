@@ -15,6 +15,7 @@
     "lives": "3",
     "minimumScoreToSave": "1",
     "maxGameMessages": "10",
+    "mainMenuBackgroundSize": "",
     "messageDuration": "2",
     "enableCursor": true,
     "enableTimer": false,
@@ -96,6 +97,12 @@
         "name": "Default Player Name",
         "description": "Default player name that appears in the main menu.",
         "type": "text"
+      },
+      {
+        "key": "mainMenuBackgroundSize",
+        "name": "Main Menu Background Size",
+        "description": "Empty for tiled background. Use CSS background-size properties only. Eg. cover",
+        "type": "image"
       },
       {
         "key": "maxConnectionsPerShard",
