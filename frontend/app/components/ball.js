@@ -11,6 +11,7 @@
   sndLost
   soundImage
   addScore
+  isMobile
 */
 
 class Ball extends GameObject {
@@ -18,7 +19,7 @@ class Ball extends GameObject {
 
   velocity = 0
 
-  maxVelocity = 2
+  maxVelocity = isMobile ? 5 : 2
 
   update() {
     this.rotate(null, 0.04, 'auto')

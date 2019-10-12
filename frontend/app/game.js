@@ -39,42 +39,50 @@ function gamePlay() {
   // Spawn a ball every second
   ;(() => {
     ballTimer += 1 / frameRate()
-    if (ballTimer >= 1.15) {
+
+    const interval = isMobile ? 0.85 : 1
+    const ballSize = isMobile ? 1.5 : 2
+
+    if (ballTimer >= interval) {
       const ballType1 = random(ballTypes)
       const ballType2 = random(ballTypes)
 
-      balls.push(
-        new Ball(
-          {
-            x: random(0, width),
-            y: 0 - objSize * random(3, 6),
-          },
-          { radius: objSize * 2 },
-          {
-            shape: 'circle',
-            image: ballType1.image,
-            rotate: Koji.config.strings.rotateFallingBalls,
-            type: ballType1.type,
-            scoreGivenAfterBusting: ballType1.scoreGivenAfterBusting,
-            scoreGivenAfterOut: ballType1.scoreGivenAfterOut,
-          }
-        ),
-        new Ball(
-          {
-            x: random(0, width),
-            y: 0 - objSize * random(2, 6),
-          },
-          { radius: objSize * 2 },
-          {
-            shape: 'circle',
-            image: ballType2.image,
-            rotate: Koji.config.strings.rotateFallingBalls,
-            type: ballType2.type,
-            scoreGivenAfterBusting: ballType2.scoreGivenAfterBusting,
-            scoreGivenAfterOut: ballType2.scoreGivenAfterOut,
-          }
+      const pushBall = () => {
+        balls.push(
+          new Ball(
+            {
+              x: random(0, width),
+              y: 0 - objSize * random(3, 6),
+            },
+            { radius: objSize * ballSize },
+            {
+              shape: 'circle',
+              image: ballType1.image,
+              rotate: Koji.config.strings.rotateFallingBalls,
+              type: ballType1.type,
+              scoreGivenAfterBusting: ballType1.scoreGivenAfterBusting,
+              scoreGivenAfterOut: ballType1.scoreGivenAfterOut,
+            }
+          ),
+          new Ball(
+            {
+              x: random(0, width),
+              y: 0 - objSize * random(2, 6),
+            },
+            { radius: objSize * ballSize },
+            {
+              shape: 'circle',
+              image: ballType2.image,
+              rotate: Koji.config.strings.rotateFallingBalls,
+              type: ballType2.type,
+              scoreGivenAfterBusting: ballType2.scoreGivenAfterBusting,
+              scoreGivenAfterOut: ballType2.scoreGivenAfterOut,
+            }
+          )
         )
-      )
+      }
+
+      pushBall()
 
       ballTimer = 0
     }

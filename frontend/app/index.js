@@ -496,7 +496,7 @@ function touchStarted() {
             ball.settings.scoreGivenAfterBusting,
             ball.settings.type !== 2 ? imgLife : soundImage,
             { x: mouseX, y: mouseY },
-            10,
+            isMobile ? 4 : 10,
             {
               floatingText: true,
             }
@@ -508,7 +508,7 @@ function touchStarted() {
             ball.settings.scoreGivenAfterBusting,
             ball.settings.type !== 2 ? imgLife : soundImage,
             { x: mouseX, y: mouseY },
-            10,
+            isMobile ? 4 : 10,
             {
               floatingText: true,
             }
