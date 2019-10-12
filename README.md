@@ -1,6 +1,4 @@
-# `📦 p5.js Multiplayer Scaffold`
-
-Start your day with some multiplayer gaming p5.js juice!
+# `Tap Those ⭐`
 
 ## 😃 Getting Started
 
@@ -16,37 +14,11 @@ This is a multiplayer game scaffold that uses `@withkoji/dispatch`.
 
 ## ⚒️ Customizations
 
-Things that can be customized:
-
-### Colors
-
-- Many colors are already set for you. Just use them in code.
-
-- Color names here.
-
-### Images
-
-- Many images are already set for you. Just use them in code.
-
-- Put all your Image names here.
-
-### Sounds
-
-- Many sounds are already set for you. Just use them in code.
-
-- Put your Sound names here.
-
-### Game Settings
-
-- Many strings are already set for you. Just use them in code.
-
-- Put your game settings here.
+Check out the VCC to see what can be controlled.
 
 ## 📖 Notes
 
 Avoid resizing the game window while playing, weird stuff happens.
-
-Few Koji Visual Customization Controls are already there for you to use. They were put together by @Svarog on Koji platform.
 
 ## ☕ For developers
 
@@ -116,7 +88,7 @@ $ git push github master # <- only if you also maintain a GitHub Repository
 
 ## 🤙 Wanna contribute❓
 
-Just shoot a Pull Request at [the official GitHub repository of this game 📦](https://github.com/KumarAbhirup/p5js_multiplayer_koji_scaffold)
+Just shoot a Pull Request at [the official GitHub repository of this game 📦](https://github.com/KumarAbhirup/tap_those)
 
 Or follow me and DM on [Twitter @kumar_abhirup](https://twitter.com/kumar_abhirup) 🙌
 
