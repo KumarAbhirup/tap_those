@@ -172,6 +172,8 @@ function preload() {
 
 // Instantiate objects here
 function instantiate() {
+  window.setName(dispatch.userInfo.playerName)
+
   player = new Player(
     {
       x: random(0, width),
@@ -360,6 +362,20 @@ function manageData() {
 }
 
 function handleNewConnection() {
+  let enemyIDs = []
+
+  for (let i = 0; i < enemies.length; i++) {
+    enemyIDs[i] = enemies[i].id
+  }
+
+  for (let id in users) {
+    if (id !== dispatch.clientId) {
+      if (!enemyIDs.includes(id) && users[id].playerName) {
+        spawnEnemy(id, users[id].playerName)
+      }
+    }
+  }
+
   removeEmptyEnemies()
 }
 
@@ -378,6 +394,25 @@ function removeEmptyEnemies() {
       enemies[i].removable = true
     }
   }
+}
+
+function spawnEnemy(userId, playerName) {
+  const toBePushedEnemy = new Player(
+    {
+      x: random(0, width),
+      y: random(0, height),
+    },
+    { radius: 20 },
+    {
+      shape: 'circle',
+      color: '#ffffff',
+      id: userId,
+      playerName: playerName || 'Player',
+    }
+  )
+  toBePushedEnemy.id = userId
+
+  enemies.push(toBePushedEnemy)
 }
 
 /**
