@@ -45,6 +45,7 @@ let leaderboardButton
 let endButton
 
 // Score data
+let lives
 let startingLives
 let scoreGain
 let highscoreGained
