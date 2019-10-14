@@ -260,7 +260,7 @@ function setup() {
    */
   if (Koji.config.sounds.backgroundMusic)
     sndMusic = loadSound(Koji.config.sounds.backgroundMusic, () =>
-      playMusic(sndMusic, 0.4, false)
+      playMusic(sndMusic, 0.4, true)
     )
 
   // Dispatch Events and Streamers
@@ -277,6 +277,7 @@ function setup() {
     enemies.forEach(enemy => {
       if (enemy.id === payload.id) {
         enemy.score = payload.score
+        enemy.lives = payload.lives
         enemy.name = payload.name
       }
     })
@@ -355,6 +356,7 @@ function manageData() {
       id: dispatch.clientId,
       name: dispatch.userInfo.playerName,
       score,
+      lives,
     })
   } catch (error) {
     console.log(error)
