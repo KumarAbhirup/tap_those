@@ -188,7 +188,8 @@ function updateGameStatus() {
 
     for (let i = 0; i < enemies.length; i += 1) {
       if (enemies[i].name) {
-        txt += `${enemies[i].name}: ${enemies[i].score} / ${enemies[i].lives}\n`
+        txt += `${enemies[i].name}: ${enemies[i].score} / ${startingLives -
+          enemies[i].lives}\n`
       }
     }
 
